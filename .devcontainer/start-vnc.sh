@@ -19,7 +19,7 @@ EOF
 chmod +x "$HOME/.vnc/xstartup.turbovnc"
 
 # Inicia o Xvfb (display virtual)
-Xvfb $DISPLAY -screen 0 1920x1080x24 +extension GLX +render -noreset >/dev/null 2>&1 &
+Xvfb $DISPLAY -screen 0 1920x900x24 +extension GLX +render -noreset >/dev/null 2>&1 &
 
 # Inicia o TurboVNC no display :1
 vncserver $DISPLAY -geometry 1280x900 -depth 24 \

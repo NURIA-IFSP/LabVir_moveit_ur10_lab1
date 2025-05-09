@@ -10,7 +10,6 @@
     "--shm-size=2g"
   ],
   "forwardPorts": [6080],
-  "postStartCommand": "xfce4-terminal --title 'VNC Server' --working-directory=/home/ubuntu -e './start-vnc.sh'",
   "portsAttributes": {
     "6080": {
       "label": "noVNC Desktop",
