@@ -1,0 +1,5 @@
+pratica_ros_1
+/projeto_1_PosDoc/catkin_ws/devel/.private/pratica_ros_1/cmake.lock /projeto_1_PosDoc/catkin_ws/devel/./cmake.lock
+/projeto_1_PosDoc/catkin_ws/devel/.private/pratica_ros_1/share/pratica_ros_1/cmake/pratica_ros_1Config-version.cmake /projeto_1_PosDoc/catkin_ws/devel/share/pratica_ros_1/cmake/pratica_ros_1Config-version.cmake
+/projeto_1_PosDoc/catkin_ws/devel/.private/pratica_ros_1/share/pratica_ros_1/cmake/pratica_ros_1Config.cmake /projeto_1_PosDoc/catkin_ws/devel/share/pratica_ros_1/cmake/pratica_ros_1Config.cmake
+/projeto_1_PosDoc/catkin_ws/devel/.private/pratica_ros_1/lib/pkgconfig/pratica_ros_1.pc /projeto_1_PosDoc/catkin_ws/devel/lib/pkgconfig/pratica_ros_1.pc

@@ -1,0 +1,5 @@
+tangs_arm/tangs_moveit_config
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_moveit_config/cmake.lock /projeto_1_PosDoc/catkin_ws/devel/./cmake.lock
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_moveit_config/share/tangs_moveit_config/cmake/tangs_moveit_configConfig-version.cmake /projeto_1_PosDoc/catkin_ws/devel/share/tangs_moveit_config/cmake/tangs_moveit_configConfig-version.cmake
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_moveit_config/share/tangs_moveit_config/cmake/tangs_moveit_configConfig.cmake /projeto_1_PosDoc/catkin_ws/devel/share/tangs_moveit_config/cmake/tangs_moveit_configConfig.cmake
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_moveit_config/lib/pkgconfig/tangs_moveit_config.pc /projeto_1_PosDoc/catkin_ws/devel/lib/pkgconfig/tangs_moveit_config.pc

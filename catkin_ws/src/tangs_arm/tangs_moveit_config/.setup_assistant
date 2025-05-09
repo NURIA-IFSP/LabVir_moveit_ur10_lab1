@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: tangs_description
+    relative_path: urdf/tangs.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/tangs.srdf
+  CONFIG:
+    author_name: LMarangoni
+    author_email: oliveiralcm@email.com
+    generated_timestamp: 1742843823

@@ -1,0 +1,18 @@
+tangs/robot_arm_controller:
+  type: "position_controllers/JointTrajectoryController"
+  joints: ['tangs/waist', 'tangs/shoulder', 'tangs/elbow', 'tangs/wrist_yaw', 'tangs/wrist_pitch']
+  gains:
+   tangs/waist: {p: 10000.0, i: 0.0, d: 0.0, i_clamp: 0.0, i_clamp_min: 0.0, i_clamp_max: 0.0}
+   tangs/shoulder: {p: 10000.0, i: 0.0, d: 0.0, i_clamp: 0.0, i_clamp_min: 0.0, i_clamp_max: 0.0}
+   tangs/elbow: {p: 10000.0, i: 0.0, d: 0.0, i_clamp: 0.0, i_clamp_min: 0.0, i_clamp_max: 0.0}
+   tangs/wrist_yaw: {p: 10000.0, i: 0.0, d: 0.0, i_clamp: 0.0, i_clamp_min: 0.0, i_clamp_max: 0.0}
+   tangs/wrist_pitch: {p: 10000.0, i: 0.0, d: 0.0, i_clamp: 0.0, i_clamp_min: 0.0, i_clamp_max: 0.0}
+
+tangs/gripper_controller:
+  type: "position_controllers/JointTrajectoryController"
+  joints: ['tangs/gripper_joint']
+  
+tangs/joint_state_controller:
+  type: "joint_state_controller/JointStateController"
+  publish_rate: 50
+

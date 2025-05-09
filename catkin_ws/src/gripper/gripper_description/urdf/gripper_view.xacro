@@ -1,0 +1,320 @@
+<?xml version="1.0" ?>
+<robot name="rg3" xmlns:xacro="http://ros.org/wiki/xacro">
+<!-- Argumento para o prefixo TF -->
+    <xacro:arg name="robot_name" default="tangs" />
+    <xacro:property name="tf_prefix" value="$(arg robot_name)" />
+
+
+<!-- Arquivo para visualização da garra gripper - somente -->
+
+
+    <xacro:property name="pi" value="3.141592654" />
+    <xacro:include filename="$(find gripper_description)/urdf/gazebo.xacro" />
+    <xacro:include filename="$(find gripper_description)/urdf/transmissions.xacro" />
+
+     
+    <!-- Xmacro principal que gera a garra -->
+
+    <xacro:macro name="gripper" params="" >   
+
+    <link name="dummy_link">
+    </link>
+
+    <link name="palm_link">
+        <collision>
+            <origin xyz="0.015 0.015 -0.018" rpy="${pi} ${-pi} 0.0"/>
+            <geometry>
+                <!-- <mesh filename="package://gripper_description/meshes/collision/RG3_Palm_col.stl"/> -->
+                <mesh filename="package://gripper_description/meshes/visual/RG3_gripper_base_m_tk2.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <!-- <origin xyz="0.00 0.0015 -0.014" rpy="0.00 0.00 0.00"/> -->
+            <origin xyz="0.015 0.015 -0.018" rpy="${pi} ${-pi} 0.0"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_gripper_base_m_tk2.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="-0.061902 0.000129 -0.000005" rpy="0.00 0.00 0.00"/>
+            <mass value="0.02"/>
+            
+            <xacro:box_inertia mass="0.02" x="0.05" y="0.08" z="0.01"/> 
+            
+            <!-- <inertia ixx="0.000862" ixy="0.000000" ixz="0.000000"
+                     iyy="0.002401" iyz="-0.000001"
+                     izz="0.002620" /> -->
+        </inertial>
+    </link>
+    
+    <link name="l_moment_arm_link">
+        <collision>
+            <origin xyz="0.01 -0.0021 0.0005" rpy="0.00 0.00 3.01415"/>
+            <geometry>
+                <!-- <mesh filename="package://gripper_description/meshes/collision/RG3_GearLeft_col.stl"/> -->
+                <mesh filename="package://gripper_description/meshes/visual/RG3_gear_left_m.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.01 -0.0021 0.0005" rpy="0.00 0.00 3.01415"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_gear_left_m.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0.017004 0.006397 -0.010300" rpy="0.00 0.00 0.00"/>
+            <mass value="0.0060209"/>
+            <inertia ixx="0.000023" ixy="0.000019" ixz="0.000000"
+                     iyy="0.000072" iyz="0.000000"
+                     izz="0.000083" />
+        </inertial>
+    </link>
+    
+    <link name="l_finger_link">
+        <collision>
+            <origin xyz="0.030 -0.005 0.0045" rpy="0.00 0.00 -0.38"/>
+            <geometry>
+                <!-- <mesh filename="package://gripper_description/meshes/collision/RG3_griplink_left_col.stl"/> -->
+                <mesh filename="package://gripper_description/meshes/visual/RG3_grip_finger_left_m.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.030 -0.005 0.0045" rpy="0.00 0.00 -0.38"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_grip_finger_left_m.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0.024695 -0.010178 -0.010001" rpy="0.00 0.00 0.00"/>
+            <mass value="0.0081638"/>
+            <inertia ixx="0.000006" ixy="-0.000005" ixz="0.000000"
+                     iyy="0.000025" iyz="0.000000"
+                     izz="0.000026" />
+        </inertial>
+    </link>
+
+    <link name="l_truss_arm_link">
+        <collision>
+            <origin xyz="0.016 0.00 0.00" rpy="0.00 0.00 0"/>
+            <geometry>
+                <!-- <mesh filename="package://gripper_description/meshes/collision/RG3_griplink_left_col.stl"/> -->
+                <mesh filename="package://gripper_description/meshes/visual/RG3_grip_link_left_m.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.016 0.00 0.00" rpy="0.00 0.00 0"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_grip_link_left_m.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0.023075 0.012136 -0.010000" rpy="0.00 0.00 0.00"/>
+            <mass value="0.0065927"/>
+            <inertia ixx="0.000010" ixy="0.000010" ixz="0.000000"
+                     iyy="0.000024" iyz="0.000000"
+                     izz="0.000025" />
+        </inertial>
+    </link>
+  
+    <link name="r_moment_arm_link">
+        <collision>
+            <origin xyz="0.01 -0.0111 0.0005" rpy="0.00 0.00 3.000415"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_gear_right_m.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.01 -0.0111 0.0005" rpy="0.00 0.00 3.000415"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_gear_right_m.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0.017004 -0.006397 -0.010300" rpy="0.00 0.00 0.00"/>
+            <mass value="0.0060209"/>
+            <inertia ixx="0.000023" ixy="-0.000019" ixz="0.000000"
+                     iyy="0.000072" iyz="0.000000"
+                     izz="0.000083" />
+        </inertial>
+    </link>
+
+    <link name="r_truss_arm_link">
+        <collision>
+             <origin xyz="0.016 -0.000 0.0045" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_grip_link_left_m.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+             <origin xyz="0.016 -0.000 0.0045" rpy="0.00 0.00 0.0"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/RG3_grip_link_left_m.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0.023075 -0.012136 -0.010000" rpy="0.00 0.00 0.00"/>
+            <mass value="0.0065927"/>
+            <inertia ixx="0.000010" ixy="-0.000010" ixz="0.000000"
+                     iyy="0.000024" iyz="0.000000"
+                     izz="0.000025" />
+        </inertial>
+    </link>
+
+    <link name="r_finger_link">
+        <collision>
+            <origin xyz="0.022 0.026 0.020" rpy="0.00 3.1415 0.38"/>
+            <geometry>
+               <mesh filename="package://gripper_description/meshes/visual/gear_right3.stl"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0.022 0.026 0.020" rpy="0.00 3.1415 0.38"/>
+            <geometry>
+                <mesh filename="package://gripper_description/meshes/visual/gear_right3.stl"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <origin xyz="0.024695 0.010178 -0.010000" rpy="0.00 0.00 0.00"/>
+            <mass value="0.0081637"/>
+            <inertia ixx="0.000006" ixy="0.000005" ixz="0.000000"
+                     iyy="0.000025" iyz="0.000000"
+                     izz="0.000026" />
+        </inertial>
+    </link>
+
+    <!-- Juntas -->
+
+   <joint name="base_fixed_joint" type="fixed">
+        <parent link="dummy_link"/>  <!-- Usa o parent_link passado como parâmetro --> 
+        <!-- <parent link="base_link" /> -->
+        <child link="palm_link"/>
+        <origin xyz="-0.015 0.000 0.0025" rpy="-${pi/2} 0 0"/>
+    </joint>
+
+    <joint name="gripper_joint" type="revolute">
+        <parent link="palm_link"/>
+        <child link="l_moment_arm_link"/>
+        <origin xyz="-0.042 -0.005 0.012" rpy="0 0 ${pi}"/>
+        <axis xyz="0 0 1"/>
+        <limit velocity="3.14" effort="10.6" lower="${0}" upper="${pi*0.5}" />
+        <!-- <limit velocity="3.14" effort="100" lower="-3" upper="3" /> -->
+        <dynamics damping="0.1" friction="0.0" />
+        <implicitSpringDamper>True</implicitSpringDamper>
+    </joint>
+     
+    <xacro:insert_transmission name="gripper_joint" />
+    
+    <joint name="l_finger_2_joint" type="revolute">
+        <parent link="l_moment_arm_link"/>
+        <child link="l_finger_link"/>
+        <origin xyz="0.0315 0.0008 0.000" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit velocity="3.14" effort="10.6" lower="${-pi*0.5}" upper="${pi*0.5}" />
+        <!-- <limit velocity="3.14" effort="100" lower="-3" upper="3" /> -->
+        <mimic joint="gripper_joint" multiplier="-1"/>
+        <dynamics damping="0.1" friction="0.0" />
+        <implicitSpringDamper>True</implicitSpringDamper>
+    </joint>
+    <xacro:insert_transmission name="l_finger_2_joint" /> 
+     
+    <xacro:mimic_joint_plugin_gazebo name_prefix="l_finger_2_joint"
+                                     parent_joint="gripper_joint"
+                                     mimic_joint="l_finger_2_joint"
+                                     has_pid="false"
+                                     multiplier="-1.0"
+                                     max_effort="10.6" />
+    
+    <joint name="l_finger_passive_joint" type="revolute">
+        <parent link="palm_link"/>
+        <child link="l_truss_arm_link"/>
+         <origin xyz="-0.062 0.0045 0.012" rpy="0 0 ${pi}"/>
+        <axis xyz="0 0 1"/>
+        <limit velocity="3.14" effort="10.6" lower="${-pi*0.5}" upper="${pi*0.5}" />
+        <!-- <limit velocity="3.14" effort="100" lower="-3" upper="3" /> -->
+        <mimic joint="gripper_joint" multiplier="1"/>
+        <dynamics damping="0.1" friction="0.0" />
+        <implicitSpringDamper>True</implicitSpringDamper>
+    </joint>
+    
+    <xacro:insert_transmission name="l_finger_passive_joint" /> 
+     
+    <xacro:mimic_joint_plugin_gazebo name_prefix="l_finger_passive_joint"
+                                     parent_joint="gripper_joint"
+                                     mimic_joint="l_finger_passive_joint"
+                                     has_pid="false"
+                                     multiplier="1.0"
+                                     max_effort="10.6" />
+
+     <joint name="r_finger_1_joint" type="revolute">
+        <parent link="palm_link"/>
+        <child link="r_moment_arm_link"/>
+        <!-- <origin xyz="0.055 -0.0035 0.016" rpy="0 0 0"/> -->
+        <origin xyz="-0.042 0.022 0.008" rpy="0 0 ${pi}"/>
+        <axis xyz="0 0 1"/>
+        <limit velocity="3.14" effort="10.6" lower="${-pi*0.5}" upper="${pi*0.5}" />
+        <!-- <limit velocity="3.14" effort="100" lower="-3" upper="3" /> -->
+        <mimic joint="gripper_joint" multiplier="-1"/>
+        <dynamics damping="0.1" friction="0.0" />
+        <implicitSpringDamper>True</implicitSpringDamper>
+    </joint>
+    
+    <xacro:insert_transmission name="r_finger_1_joint" />
+    <xacro:mimic_joint_plugin_gazebo name_prefix="r_finger_1_joint"
+                                     parent_joint="gripper_joint"
+                                     mimic_joint="r_finger_1_joint"
+                                     has_pid="false"
+                                     multiplier="-1.0"
+                                     max_effort="10.6" />
+
+     <joint name="r_finger_passive_joint" type="revolute">
+        <parent link="palm_link"/>
+        <child link="r_truss_arm_link"/>
+        <origin xyz="-0.062 0.012 0.008" rpy="0 0 ${pi}"/>
+        <axis xyz="0 0 1"/>
+        <limit velocity="3.14" effort="10.6" lower="${-pi*0.5}" upper="${pi*0.5}" />
+        <!-- <limit velocity="3.14" effort="100" lower="-3" upper="3" /> -->
+        <mimic joint="gripper_joint" multiplier="-1"/>
+        <dynamics damping="0.1" friction="0.0" />
+        <implicitSpringDamper>True</implicitSpringDamper>
+    </joint>
+    <xacro:insert_transmission name="r_finger_passive_joint" />
+    <xacro:mimic_joint_plugin_gazebo name_prefix="r_finger_passive_joint"
+                                     parent_joint="gripper_joint"
+                                     mimic_joint="r_finger_passive_joint"
+                                     has_pid="false"
+                                     multiplier="-1.0"
+                                     max_effort="10.6" />
+
+    <joint name="r_finger_2_joint" type="revolute">
+        <parent link="r_moment_arm_link"/>
+        <child link="r_finger_link"/>
+        <origin xyz="0.032 -0.0015 0.005" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit velocity="3.14" effort="10.6" lower="${-pi*0.5}" upper="${pi*0.5}" />
+        <!-- <limit velocity="3.14" effort="100" lower="-3" upper="3" /> -->
+        <mimic joint="gripper_joint" multiplier="1"/>
+        <dynamics damping="0.1" friction="0.0" />
+        <implicitSpringDamper>True</implicitSpringDamper>
+    </joint>
+    <xacro:insert_transmission name="r_finger_2_joint" />
+    <xacro:mimic_joint_plugin_gazebo name_prefix="r_finger_2_joint"
+                                     parent_joint="gripper_joint"
+                                     mimic_joint="r_finger_2_joint"
+                                     has_pid="false"
+                                     multiplier="1.0"
+                                     max_effort="10.6" />
+    
+</xacro:macro>
+
+<xacro:macro name="box_inertia" params="mass x y z">
+    <inertia  ixx="${mass*(y*y+z*z)/12}" ixy = "0" ixz = "0"
+              iyy="${mass*(x*x+z*z)/12}" iyz = "0"
+              izz="${mass*(x*x+z*z)/12}" />
+</xacro:macro>
+
+<!-- Executa a macro e gera a garra-->
+
+<xacro:gripper />
+
+
+</robot>

@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <arg name="position_controller" default="true"/>
+    <arg name="paused" default="true"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+  
+    <!-- Mundo Gazebo -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find simulation_gazebo)/worlds/lab1.world"/>
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
+
+    <!-- Robô 1: tangs1 (sem delay) -->
+    <include file="$(find tangs_simulation)/launch/load_tangs_xacro_gazebo.launch">
+        <arg name="robot_name" value="tangs1" />
+        <arg name="x" value="-0.5" />
+        <arg name="y" value="0.0" />
+        <arg name="z" value="1.015" />
+    </include>
+
+   
+
+    <!-- Robô 2: tangs2 (com delay de 5 segundos) -->
+
+<!-- Comando em linha para carregamento do 2o robo -->
+
+<!-- roslaunch tangs_simulation load_tangs_xacro_gazebo.launch robot_name:=tangs2 x:=0.5 y:=0.0 z:=1.015 -->
+
+    <!-- <include file="$(find tangs_simulation)/launch/load_tangs_xacro_gazebo.launch">
+        <arg name="robot_name" value="tangs2" />
+        <arg name="x" value="0.5" />
+        <arg name="y" value="0.0" />
+        <arg name="z" value="1.015" />
+    </include> -->
+    
+
+
+
+</launch>

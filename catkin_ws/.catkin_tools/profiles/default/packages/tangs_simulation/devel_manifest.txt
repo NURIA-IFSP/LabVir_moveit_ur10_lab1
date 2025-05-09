@@ -1,0 +1,5 @@
+tangs_arm/tangs_simulation
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_simulation/cmake.lock /projeto_1_PosDoc/catkin_ws/devel/./cmake.lock
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_simulation/share/tangs_simulation/cmake/tangs_simulationConfig-version.cmake /projeto_1_PosDoc/catkin_ws/devel/share/tangs_simulation/cmake/tangs_simulationConfig-version.cmake
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_simulation/share/tangs_simulation/cmake/tangs_simulationConfig.cmake /projeto_1_PosDoc/catkin_ws/devel/share/tangs_simulation/cmake/tangs_simulationConfig.cmake
+/projeto_1_PosDoc/catkin_ws/devel/.private/tangs_simulation/lib/pkgconfig/tangs_simulation.pc /projeto_1_PosDoc/catkin_ws/devel/lib/pkgconfig/tangs_simulation.pc

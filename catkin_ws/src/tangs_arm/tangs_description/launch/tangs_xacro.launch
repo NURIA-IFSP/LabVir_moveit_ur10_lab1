@@ -1,0 +1,39 @@
+<launch>
+    <arg name="arg_x" default="0.00" />
+    <arg name="arg_y" default="0.00" />
+    <arg name="arg_z" default="0.00" />
+    <arg name="arg_R" default="0.00" />
+    <arg name="arg_P" default="0.00" />
+    <arg name="arg_Y" default="0.00" />
+
+    <!-- Descrição do robô - arquivo xacro -->
+    <arg name="model" default="$(find tangs_description)/urdf/tangs.xacro"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+
+    <!-- Spawn a empty gazebo world dentro do namespace -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+    <!-- Transformação estática do mundo para o robô -->
+    <node name="tf_footprint_base" pkg="tf" type="static_transform_publisher" 
+          args="0 0 0 0 0 0 1 tangs/world base_footprint 40" />
+
+    <!-- Spawn do modelo no Gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
+          args="-x $(arg arg_x) -y $(arg arg_y) -z $(arg arg_z) -Y $(arg arg_Y) 
+          -param robot_description -urdf -model tangs 
+          -J tangs/waist 0.0 -J tangs/shoulder 0.0 -J tangs/elbow 0.0 -J tangs/wrist_yaw 0.0 -J tangs/wrist_pitch 0.0" />
+
+      <!-- Carregar e lançar os controladores -->
+    <rosparam file ="$(find tangs_simulation)/config/joint_trajectory_controller9.yaml" command="load"/>
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+          args="tangs/joint_state_controller tangs/robot_arm_controller tangs/gripper_controller" />
+
+    <!-- Publicação dos estados das juntas para TF e RViz -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+
+    <!-- Inicializar o MoveIt dentro do namespace -->
+    <!-- <include file="$(find tangs_moveit_config)/launch/move_group.launch"/> -->
+ 
+
+</launch>
