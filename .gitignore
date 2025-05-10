@@ -54,3 +54,8 @@ simulations/roomba_ros_ic
 
 # core dump
 core.*
+
+# Gigafiles
+*.tar
+*.tar.gz
+*.tar.bz2
