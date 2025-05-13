@@ -1,4 +1,0 @@
-gripper/gripper_description
-/LabVir_moveit_01/catkin_ws/devel/.private/gripper_description/share/gripper_description/cmake/gripper_descriptionConfig-version.cmake /LabVir_moveit_01/catkin_ws/devel/share/gripper_description/cmake/gripper_descriptionConfig-version.cmake
-/LabVir_moveit_01/catkin_ws/devel/.private/gripper_description/share/gripper_description/cmake/gripper_descriptionConfig.cmake /LabVir_moveit_01/catkin_ws/devel/share/gripper_description/cmake/gripper_descriptionConfig.cmake
-/LabVir_moveit_01/catkin_ws/devel/.private/gripper_description/lib/pkgconfig/gripper_description.pc /LabVir_moveit_01/catkin_ws/devel/lib/pkgconfig/gripper_description.pc

@@ -18,15 +18,15 @@ exec startxfce4
 EOF
 chmod +x "$HOME/.vnc/xstartup.turbovnc"
 
-# Inicia o Xvfb (display virtual)
-Xvfb $DISPLAY -screen 0 1920x900x24 +extension GLX +render -noreset >/dev/null 2>&1 &
+# ⚠️ Removido o Xvfb — desnecessário com TurboVNC
+# Xvfb $DISPLAY -screen 0 1920x900x24 +extension GLX +render -noreset >/dev/null 2>&1 &
 
-# Inicia o TurboVNC no display :1
+echo "Iniciando TurboVNC no display $DISPLAY..."
 vncserver $DISPLAY -geometry 1280x900 -depth 24 \
     -xstartup "$HOME/.vnc/xstartup.turbovnc" \
     -securitytypes TLSNone \
     -nohttpd \
-    -noxstartup >/dev/null 2>&1
+    -noxstartup
 
 # Aguarda inicialização
 sleep 3
@@ -39,6 +39,10 @@ else
     echo "websockify já está em execução. Pulando."
 fi
 
+# Após o websockify
+echo "Checando se DISPLAY está ativo..."
+export DISPLAY=:1
+xdpyinfo >/dev/null 2>&1 && echo "DISPLAY ok!" || echo "Falha ao acessar DISPLAY"
 
 # Inicia aplicativos (se necessário)
 bash "$HOME/start-apps.sh"

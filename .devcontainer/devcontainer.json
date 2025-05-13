@@ -1,8 +1,8 @@
 // schema validation disabled to avoid HTTP 429 errors
 {
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
-  "name": "LabVir_moveit_01:v1",
-  "image": "labvir_moveit_01:v1",
+  "name": "noetic_desktop-full_plus_moveit",
+  "dockerFile": "Dockerfile",
   "runArgs": [
     "--privileged",
     "--env=DISPLAY",

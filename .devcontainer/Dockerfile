@@ -26,14 +26,17 @@ RUN sudo apt update && sudo apt upgrade -y && \
     liburdfdom-tools \
     ros-noetic-effort-controllers \
     ros-noetic-ros-control ros-noetic-ros-controllers \
+    ros-noetic-rviz-visual-tools \
     python3-catkin-tools \
-    ros-noetic-moveit
+    ros-noetic-moveit \
+    ros-noetic-catkin \
+    libpoco-dev \
+    python3-wstool
 
-# Atualiza rosdep
-RUN sudo rosdep update
-
-# Volta para root para instalar ambiente gráfico
+# Atualiza rosdep (como root)
 USER root
+RUN rosdep init && \
+    rosdep update || true
 
 # Instala XFCE + pacotes gráficos
 ENV DEBIAN_FRONTEND=noninteractive
@@ -42,10 +45,10 @@ RUN apt-get update && \
     xfce4 xfce4-terminal \
     novnc websockify xterm x11vnc curl net-tools \
     python3-pip libgl1-mesa-dri libgl1-mesa-glx dbus-x11 mesa-utils \
-    x11-utils x11-xserver-utils wmctrl xdotool firefox\
-    && apt-get clean
+    x11-utils x11-xserver-utils wmctrl xdotool firefox && \
+    apt-get clean
 
-# Configura o display correto para o ambiente gráfico
+# Configura o display para o ambiente gráfico
 ENV DISPLAY=:1
 
 # Instala dependências para o VSCode
@@ -58,7 +61,6 @@ RUN wget -O /tmp/turbovnc.deb https://github.com/TurboVNC/turbovnc/releases/down
     dpkg -i /tmp/turbovnc.deb || apt-get install -fy && \
     rm /tmp/turbovnc.deb
 
-# Adiciona TurboVNC ao PATH
 ENV PATH="/opt/TurboVNC/bin:${PATH}"
 
 # Instala o VSCode
@@ -72,7 +74,7 @@ RUN mkdir -p /home/${USERNAME}/.vnc && \
     chmod 600 /home/${USERNAME}/.vnc/passwd && \
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.vnc
 
-# Copia scripts
+# Copia scripts de inicialização
 COPY start-vnc.sh start-apps.sh /home/${USERNAME}/
 RUN chown ${USERNAME}:${USERNAME} /home/${USERNAME}/start-*.sh && \
     chmod +x /home/${USERNAME}/start-*.sh
@@ -82,10 +84,42 @@ EXPOSE 5901 6080
 
 # Configura ROS no .bashrc
 RUN echo "source /opt/ros/noetic/setup.bash" >> /home/$USERNAME/.bashrc && \
-    echo "source /projeto1_PosDoc/init.bash" >> /home/$USERNAME/.bashrc && \
-    chown $USERNAME:$USERNAME /home/$USERNAME/.bashrc
+    echo "source /projeto1_PosDoc/init.bash" >> /home/$USERNAME/.bashrc
 
-# Alterna para usuário não-root
+# === SETUP MOVEIT WORKSPACE ===
+USER root
+
+# Cria o workspace e clona os tutoriais
+WORKDIR /home/$USERNAME/catkin_ws/src
+RUN git clone -b master https://github.com/ros-planning/moveit_tutorials.git && \
+    git clone -b noetic-devel https://github.com/ros-planning/panda_moveit_config.git && \
+    git clone -b noetic-devel https://github.com/ros-planning/moveit_visual_tools.git && \
+    git clone https://github.com/frankaemika/franka_ros.git && \
+    mv franka_ros/franka_description . && \
+    rm -rf franka_ros
+
+# Compila o workspace como root (evita erro de permissões)
+WORKDIR /home/$USERNAME/catkin_ws
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
+    catkin config --extend /opt/ros/noetic --cmake-args -DCMAKE_BUILD_TYPE=Release && \
+    catkin build"
+
+# Configura ambiente do usuário e permissões
+RUN echo "source /home/$USERNAME/catkin_ws/devel/setup.bash" >> /home/$USERNAME/.bashrc && \
+    chown -R $USERNAME:$USERNAME /home/$USERNAME
+
+# Adiciona script para abrir tutorial e RViz lado a lado
+RUN mkdir -p /home/$USERNAME/Desktop && \
+    echo '#!/bin/bash\n# Source dos workspaces ROS\nsource /ros/noetic/setup.bash\nsource /home/ubuntu/catkin_ws/devel/setup.bash\n\n# Detecta resolução da tela\nRES=$(xdpyinfo | grep dimensions | awk "{print $2}")\nWIDTH=$(echo $RES | cut -d "x" -f1)\nHEIGHT=$(echo $RES | cut -d "x" -f2)\nHALF_WIDTH=$(($WIDTH / 2))\n\n# Abre navegador na metade esquerda\nxdg-open "https://moveit.github.io/moveit_tutorials/doc/quickstart_in_rviz/quickstart_in_rviz_tutorial.html" &\nsleep 3\nwmctrl -r :ACTIVE: -e 0,0,0,$HALF_WIDTH,$HEIGHT\n\n# Abre RViz na metade direita\nxfce4-terminal --title="RViz Tutorial" --geometry=100x30 --hold -e "bash -c 'roslaunch panda_moveit_config demo.launch rviz_tutorial:=true'"&\nsleep 5\nwmctrl -r RViz -e 0,$HALF_WIDTH,0,$HALF_WIDTH,$HEIGHT\n' > /home/ubuntu/start_tutorial_and_rviz.sh && \
+    chmod +x /home/ubuntu/start_tutorial_and_rviz.sh && \
+    chown ubuntu:ubuntu /home/ubuntu/start_tutorial_and_rviz.sh
+
+# Adiciona atalho na área de trabalho para o script Tutorial + RViz
+RUN echo '[Desktop Entry]\nVersion=1.0\nType=Application\nName=Tutorial + RViz\nComment=Abre navegador com o tutorial e o RViz lado a lado\nExec=/home/ubuntu/start_tutorial_and_rviz.sh\nIcon=applications-internet\nTerminal=false\nCategories=Development;' > /home/ubuntu/Desktop/tutorial_and_rviz.desktop && \
+    chmod +x /home/ubuntu/Desktop/tutorial_and_rviz.desktop && \
+    chown ubuntu:ubuntu /home/ubuntu/Desktop/tutorial_and_rviz.desktop
+
+# Retorna para o usuário normal
 USER $USERNAME
 
 # Comando padrão

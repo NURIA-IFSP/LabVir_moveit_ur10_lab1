@@ -32,6 +32,20 @@ Você pode executar em sua máquina local ou via github codespaces:
 
     - No menu de extensões do VsCode Ctrl + Shift + X procure por: Remote - Development: Workspace
 
+## Execução do container a partir do terminal (sem uso do vscode)
+
+1. Construir a imagem docker do projeto (somente na primeira execução. Pode levar vários minutos!)
+
+     ```bash
+        cd .devcontainer
+        docker build -t labvir_moveit_01 .
+    ```
+2. Rodar o container com interface gráfica via vnc
+    ```bash
+    docker run -it --rm -p 5901:5901 -p 6080:6080 -v $(pwd):/home/ubuntu/workspace --name labvir_moveit_01_container labvir_moveit_01
+    ```
+3. Acesse o ambiente via navegador no endereço: http://localhost:6080/
+
 ## Execução do container no vscode:
 
 1. Clique no botão de play no canto inferior esquerdo do vscode:

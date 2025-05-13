@@ -1,4 +1,0 @@
-tangs_arm/tangs_moveit_config
-/LabVir_moveit_01/catkin_ws/devel/.private/tangs_moveit_config/share/tangs_moveit_config/cmake/tangs_moveit_configConfig-version.cmake /LabVir_moveit_01/catkin_ws/devel/share/tangs_moveit_config/cmake/tangs_moveit_configConfig-version.cmake
-/LabVir_moveit_01/catkin_ws/devel/.private/tangs_moveit_config/share/tangs_moveit_config/cmake/tangs_moveit_configConfig.cmake /LabVir_moveit_01/catkin_ws/devel/share/tangs_moveit_config/cmake/tangs_moveit_configConfig.cmake
-/LabVir_moveit_01/catkin_ws/devel/.private/tangs_moveit_config/lib/pkgconfig/tangs_moveit_config.pc /LabVir_moveit_01/catkin_ws/devel/lib/pkgconfig/tangs_moveit_config.pc
