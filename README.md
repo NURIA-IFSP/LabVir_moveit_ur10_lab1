@@ -1,9 +1,7 @@
 # Tutorial MoveIt
 
 Como executar:
-
-Você pode executar em sua máquina local ou via github codespaces. Se for executar no seu computador é necessária a preparação do
-ambiente local.
+Você pode executar em sua máquina local ou via GitHub Codespaces. Se for executar no seu computador é necessária a preparação do ambiente local, caso contrário vá para a seção ["Tutorial Via GitHub Codespaces"](#tutorial-via-github-codespaces).
 
 ## Preparação do ambiente na máquina local - git + docker + vscode
 
