@@ -45,7 +45,7 @@ RUN apt-get update && \
     xfce4 xfce4-terminal \
     novnc websockify xterm x11vnc curl net-tools \
     python3-pip libgl1-mesa-dri libgl1-mesa-glx dbus-x11 mesa-utils \
-    x11-utils x11-xserver-utils wmctrl xdotool firefox && \
+    x11-utils x11-xserver-utils wmctrl xdotool firefox autocutsel && \
     apt-get clean
 
 # Configura o display para o ambiente gráfico

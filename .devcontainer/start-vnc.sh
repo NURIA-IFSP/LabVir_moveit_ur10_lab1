@@ -13,6 +13,7 @@ rm -rf /tmp/.X1-lock /tmp/.X11-unix/X1 $HOME/.vnc/*
 mkdir -p "$HOME/.vnc"
 cat <<EOF > "$HOME/.vnc/xstartup.turbovnc"
 #!/bin/sh
+autocutsel -fork
 unset SESSION_MANAGER
 exec startxfce4
 EOF
