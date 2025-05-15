@@ -89,14 +89,8 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> /home/$USERNAME/.bashrc && \
 # === SETUP MOVEIT WORKSPACE ===
 USER root
 
-# Cria o workspace e clona os tutoriais
-WORKDIR /home/$USERNAME/catkin_ws/src
-RUN git clone -b master https://github.com/ros-planning/moveit_tutorials.git && \
-    git clone -b noetic-devel https://github.com/ros-planning/panda_moveit_config.git && \
-    git clone -b noetic-devel https://github.com/ros-planning/moveit_visual_tools.git && \
-    git clone https://github.com/frankaemika/franka_ros.git && \
-    mv franka_ros/franka_description . && \
-    rm -rf franka_ros
+# Copia o workspace catkin_ws do host para o container
+COPY catkin_ws /home/$USERNAME/catkin_ws
 
 # Compila o workspace como root (evita erro de permissões)
 WORKDIR /home/$USERNAME/catkin_ws

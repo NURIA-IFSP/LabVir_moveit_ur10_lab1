@@ -1,0 +1,4 @@
+universal_robot/ur20_moveit_config
+/home/ubuntu/catkin_ws/devel/.private/ur20_moveit_config/share/ur20_moveit_config/cmake/ur20_moveit_configConfig.cmake /home/ubuntu/catkin_ws/devel/share/ur20_moveit_config/cmake/ur20_moveit_configConfig.cmake
+/home/ubuntu/catkin_ws/devel/.private/ur20_moveit_config/share/ur20_moveit_config/cmake/ur20_moveit_configConfig-version.cmake /home/ubuntu/catkin_ws/devel/share/ur20_moveit_config/cmake/ur20_moveit_configConfig-version.cmake
+/home/ubuntu/catkin_ws/devel/.private/ur20_moveit_config/lib/pkgconfig/ur20_moveit_config.pc /home/ubuntu/catkin_ws/devel/lib/pkgconfig/ur20_moveit_config.pc
