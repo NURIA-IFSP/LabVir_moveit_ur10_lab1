@@ -3,6 +3,7 @@
   "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
   "name": "noetic_desktop-full_plus_moveit",
   "dockerFile": "Dockerfile",
+  "context": "..",
   "runArgs": [
     "--privileged",
     "--env=DISPLAY",

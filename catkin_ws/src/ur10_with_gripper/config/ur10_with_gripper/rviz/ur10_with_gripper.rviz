@@ -1,0 +1,19 @@
+Panels:
+  - Class: rviz/Displays
+    Name: Displays
+  - Class: rviz/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Name: RobotModel
+      Class: rviz/RobotModel
+      Robot Description: robot_description
+      Enabled: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 3.0
+      Focal Point: [0, 0, 0]
+      Pitch: 0.7
+      Yaw: 0.7
