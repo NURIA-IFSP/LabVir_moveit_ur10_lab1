@@ -1,4 +1,4 @@
-# Tutorial MoveIt
+# Pick and Place - Moveit + UR10 + PG_70 gripper
 
 Como executar:
 Você pode executar em sua máquina local ou via GitHub Codespaces. Se for executar no seu computador é necessária a preparação do ambiente local, caso contrário vá para a seção ["Tutorial Via GitHub Codespaces"](#tutorial-via-github-codespaces).
@@ -19,13 +19,13 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
 2. Baixar o repositorio em sua máquina local:
 
     ```bash
-    git clone git@github.com:NURIA-IFSP/LabVir_moveit_tutorial.git
+    git clone https://github.com/NURIA-IFSP/LabVir_moveit_ur10_lab1.git
     ```
 
 3. Abrir o vscode no diretório do projeto:
 
     ```bash
-    code LabVir_moveit_tutorial
+    code LabVir_moveit_ur10_moveit_lab01
     ```
 
 3. Garanta que o docker esteja instalado e rodando:
@@ -63,7 +63,7 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
 
 2. Clique em "Reopen in Container"
 
-3. Aguarde o container ser iniciado, o vscode irá reiniciar e abrir novamente. (Isso pode levar alguns minutos)
+3. Aguarde o container ser iniciado, o vscode irá reiniciar e abrir novamente. (Isso deve levar alguns minutos)
 
 ## Abra o ambiente de desenvolvimento no seu browser:
 
@@ -77,12 +77,25 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
 
 5. Clique no botão para estender a exibição para a tela inteira - atalho: Ctrl + Shift + F12
 
-6. Clique no ícone da área de trabalho - "Tutorial Moveit ROS"
+6. Clique no ícone da área de trabalho - "Init_ROS"
     
-    Isso deverá abrir a página do tutorial MoveIt na web e o RViz. Ajuste o tamanho para que fiquem lado a lado na tela.
+    Isso deverá abrir o terminal e exibir a preparação do ambiente ROS (deve levar alguns minutos.)
 
-7. Siga os procedimentos do tutorial
+7. Abra um terminal "Applications -> Terminal Emulator"
 
+8. Mude para o diretorio /LabVir_moveit_ur10_lab1/catkin_ws
+
+9. Execute o comando: 
+
+```bash
+    source devel/setup.bash
+    roslaunch ur10_with_gripper view_robot.launch
+```
+O RViz deverá abrir
+
+10. Para visualizar o robo com a garra:
+     - Global options -> Fixed frame -> Alterar para base
+     - Add -> incluir Robot Model
 
 ## Tutorial Via GitHub Codespaces
 
