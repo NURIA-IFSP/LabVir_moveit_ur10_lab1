@@ -46,7 +46,8 @@ export DISPLAY=:1
 xdpyinfo >/dev/null 2>&1 && echo "DISPLAY ok!" || echo "Falha ao acessar DISPLAY"
 
 # Inicia aplicativos (se necessário)
-bash "$HOME/start-apps.sh"
+#bash "$HOME/start-apps.sh"
+#bash "$HOME/init_ros.sh"
 
 # Mantém o container ativo
 tail -f /dev/null

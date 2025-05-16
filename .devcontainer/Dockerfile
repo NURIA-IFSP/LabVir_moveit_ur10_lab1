@@ -9,6 +9,7 @@ ARG USER_GID=$USER_UID
 RUN apt-get update && apt-get install -y sudo ca-certificates wget gnupg lsb-release && \
     groupadd --gid $USER_GID $USERNAME && \
     useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME && \
+    usermod -a -G dialout $USERNAME && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME && \
     chmod 0440 /etc/sudoers.d/$USERNAME
 
@@ -75,9 +76,9 @@ RUN mkdir -p /home/${USERNAME}/.vnc && \
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.vnc
 
 # Copia scripts de inicialização
-COPY start-vnc.sh start-apps.sh /home/${USERNAME}/
-RUN chown ${USERNAME}:${USERNAME} /home/${USERNAME}/start-*.sh && \
-    chmod +x /home/${USERNAME}/start-*.sh
+COPY start-vnc.sh start-apps.sh init_ros.sh /home/${USERNAME}/
+RUN chown ${USERNAME}:${USERNAME} /home/${USERNAME}/*.sh && \
+    chmod +x /home/${USERNAME}/*.sh
 
 # Expõe portas
 EXPOSE 5901 6080
@@ -90,13 +91,7 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> /home/$USERNAME/.bashrc && \
 USER root
 
 # Copia o workspace catkin_ws do host para o container
-COPY catkin_ws /home/$USERNAME/catkin_ws
-
-# Compila o workspace como root (evita erro de permissões)
-WORKDIR /home/$USERNAME/catkin_ws
-RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
-    catkin config --extend /opt/ros/noetic --cmake-args -DCMAKE_BUILD_TYPE=Release && \
-    catkin build"
+COPY catkin_ws /LabVir_moveit_ur10_lab1/catkin_ws
 
 # Configura ambiente do usuário e permissões
 RUN echo "source /home/$USERNAME/catkin_ws/devel/setup.bash" >> /home/$USERNAME/.bashrc && \
@@ -107,6 +102,11 @@ RUN mkdir -p /home/$USERNAME/Desktop && \
     echo '#!/bin/bash\n# Source dos workspaces ROS\nsource /ros/noetic/setup.bash\nsource /home/ubuntu/catkin_ws/devel/setup.bash\n\n# Detecta resolução da tela\nRES=$(xdpyinfo | grep dimensions | awk "{print $2}")\nWIDTH=$(echo $RES | cut -d "x" -f1)\nHEIGHT=$(echo $RES | cut -d "x" -f2)\nHALF_WIDTH=$(($WIDTH / 2))\n\n# Abre navegador na metade esquerda\nxdg-open "https://moveit.github.io/moveit_tutorials/doc/quickstart_in_rviz/quickstart_in_rviz_tutorial.html" &\nsleep 3\nwmctrl -r :ACTIVE: -e 0,0,0,$HALF_WIDTH,$HEIGHT\n\n# Abre RViz na metade direita\nxfce4-terminal --title="RViz Tutorial" --geometry=100x30 --hold -e "bash -c 'roslaunch panda_moveit_config demo.launch rviz_tutorial:=true'"&\nsleep 5\nwmctrl -r RViz -e 0,$HALF_WIDTH,0,$HALF_WIDTH,$HEIGHT\n' > /home/ubuntu/start_tutorial_and_rviz.sh && \
     chmod +x /home/ubuntu/start_tutorial_and_rviz.sh && \
     chown ubuntu:ubuntu /home/ubuntu/start_tutorial_and_rviz.sh
+
+# Adiciona atalho na área de trabalho para o script init_ros.sh
+RUN echo '[Desktop Entry]\nVersion=1.0\nType=Application\nName=Init ROS\nComment=Inicializa ambiente ROS\nExec=/home/ubuntu/init_ros.sh\nIcon=utilities-terminal\nTerminal=true\nCategories=Development;' > /home/ubuntu/Desktop/init_ros.desktop && \
+    chmod +x /home/ubuntu/Desktop/init_ros.desktop && \
+    chown ubuntu:ubuntu /home/ubuntu/Desktop/init_ros.desktop
 
 # Adiciona atalho na área de trabalho para o script Tutorial + RViz
 RUN echo '[Desktop Entry]\nVersion=1.0\nType=Application\nName=Tutorial + RViz\nComment=Abre navegador com o tutorial e o RViz lado a lado\nExec=/home/ubuntu/start_tutorial_and_rviz.sh\nIcon=applications-internet\nTerminal=false\nCategories=Development;' > /home/ubuntu/Desktop/tutorial_and_rviz.desktop && \

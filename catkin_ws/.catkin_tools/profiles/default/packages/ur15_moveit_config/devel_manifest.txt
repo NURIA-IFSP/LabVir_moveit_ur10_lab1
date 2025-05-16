@@ -1,4 +1,0 @@
-universal_robot/ur15_moveit_config
-/home/ubuntu/catkin_ws/devel/.private/ur15_moveit_config/share/ur15_moveit_config/cmake/ur15_moveit_configConfig-version.cmake /home/ubuntu/catkin_ws/devel/share/ur15_moveit_config/cmake/ur15_moveit_configConfig-version.cmake
-/home/ubuntu/catkin_ws/devel/.private/ur15_moveit_config/share/ur15_moveit_config/cmake/ur15_moveit_configConfig.cmake /home/ubuntu/catkin_ws/devel/share/ur15_moveit_config/cmake/ur15_moveit_configConfig.cmake
-/home/ubuntu/catkin_ws/devel/.private/ur15_moveit_config/lib/pkgconfig/ur15_moveit_config.pc /home/ubuntu/catkin_ws/devel/lib/pkgconfig/ur15_moveit_config.pc

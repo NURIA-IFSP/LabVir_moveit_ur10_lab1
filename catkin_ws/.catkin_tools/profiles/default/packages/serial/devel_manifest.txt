@@ -1,6 +1,0 @@
-serial
-/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/serial/share/serial/cmake/serialConfig-version.cmake /LabVir_moveit_ur10_lab1/catkin_ws/devel/share/serial/cmake/serialConfig-version.cmake
-/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/serial/share/serial/cmake/serialConfig.cmake /LabVir_moveit_ur10_lab1/catkin_ws/devel/share/serial/cmake/serialConfig.cmake
-/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/serial/lib/libserial.so /LabVir_moveit_ur10_lab1/catkin_ws/devel/lib/libserial.so
-/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/serial/lib/serial/serial_example /LabVir_moveit_ur10_lab1/catkin_ws/devel/lib/serial/serial_example
-/LabVir_moveit_ur10_lab1/catkin_ws/devel/.private/serial/lib/pkgconfig/serial.pc /LabVir_moveit_ur10_lab1/catkin_ws/devel/lib/pkgconfig/serial.pc
