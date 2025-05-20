@@ -1,9 +1,0 @@
-[submodule "catkin_ws/src/schunk_pg70"]
-	path = catkin_ws/src/schunk_pg70
-	url = https://github.com/KevinGalassi/schunk_pg70.git
-[submodule "catkin_ws/src/universal_robot"]
-	path = catkin_ws/src/universal_robot
-	url = https://github.com/ros-industrial/universal_robot.git
-[submodule "catkin_ws/src/ur10_moveit_lab"]
-	path = catkin_ws/src/ur10_moveit_lab
-	url = https://github.com/NURIA-IFSP/ur10_moveit_lab.git
