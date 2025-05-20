@@ -10,8 +10,9 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
     ```bash
     git --version
     ```
+
     1.1 - Se não estiver instalar:
-        
+
     ```bash
     sudo apt install git
     ```
@@ -28,17 +29,17 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
     code LabVir_moveit_ur10_moveit_lab01
     ```
 
-3. Garanta que o docker esteja instalado e rodando:
+4. Garanta que o docker esteja instalado e rodando:
 
     ```bash
         docker --version
     ```
 
-4. Se não tiver, instalar o docker:
+5. Se não tiver, instalar o docker:
 
     [Docker Installation Guide](https://docs.docker.com/get-started/get-docker/)
 
-5. Instale a extensão remote - developement: workspace, no vscode:
+6. Instale a extensão remote - developement: workspace, no vscode:
 
     - No menu de extensões do VsCode Ctrl + Shift + X procure por: Remote - Development: Workspace
 
@@ -56,7 +57,7 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
     ```
 3. Acesse o ambiente via navegador no endereço: http://localhost:6080/ -->
 
-## Execução do container no vscode:
+## Execução do container no vscode
 
 1. Clique no botão de play no canto inferior esquerdo do vscode:
     ![image](https://user-images.githubusercontent.com/10620355/221400332-30592847-0224-491f-9347-138279a71770.png)
@@ -65,11 +66,11 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
 
 3. Aguarde o container ser iniciado, o vscode irá reiniciar e abrir novamente. (Isso deve levar alguns minutos)
 
-## Abra o ambiente de desenvolvimento no seu browser:
+## Abra o ambiente de desenvolvimento no seu browser
 
 1. Abra o terminal PORTS do vscode com o atalho: Ctrl + Shift + P - Forward a Port
 
-2. Clique na primeira porta que estará mapeada no endereço:  http://localhost:6080 
+2. Clique na primeira porta que estará mapeada no endereço:  <http://localhost:6080>
 
 3. O ambiente XFCE4 deverá abrir no seu browser
 
@@ -78,24 +79,38 @@ Você pode executar em sua máquina local ou via GitHub Codespaces. Se for execu
 5. Clique no botão para estender a exibição para a tela inteira - atalho: Ctrl + Shift + F12
 
 6. Clique no ícone da área de trabalho - "Init_ROS"
-    
+
     Isso deverá abrir o terminal e exibir a preparação do ambiente ROS (deve levar alguns minutos.)
 
 7. Abra um terminal "Applications -> Terminal Emulator"
 
 8. Mude para o diretorio /LabVir_moveit_ur10_lab1/catkin_ws
 
-9. Execute o comando: 
+## Visualização do braço robótico no RVIz
+
+9. Execute o comando:
 
 ```bash
     source devel/setup.bash
     roslaunch ur10_with_gripper view_robot.launch
 ```
-O RViz deverá abrir
 
-10. Para visualizar o robo com a garra:
-     - Global options -> Fixed frame -> Alterar para base
-     - Add -> incluir Robot Model
+Como alternativa você pode executar o script que abre e dimensiona as janelas no xfce4:
+    ``bash
+        cd /LabVir_moveit_ur10_lab1/catkin_ws/src/ur10_with_gripper/scripts
+        ./init_view_robot_with_gripper.sh
+    ```
+    
+O RViz deverá abrir com esta tela:
+
+![RViz com UR10 e Garra](./tela_robot_garra_rviz.png)
+
+Você poderá movimentar os slides laterais para movimentação e teste do braço robótico
+
+## Simulação do braço robótico no simulador Gazebo
+
+
+
 
 ## Tutorial Via GitHub Codespaces
 
