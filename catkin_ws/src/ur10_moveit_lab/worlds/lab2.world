@@ -33,12 +33,18 @@
       <uri>model://table</uri>
       <pose>1 1 0 0 0 0</pose>
     </include>
+    
+    <!-- Mesa 2 -->
+    <include>
+      <uri>model://table</uri>
+      <pose>1 1 0 0 0 1.57</pose>
+    </include>
 
     <!-- Objeto sobre a mesa (ex: esfera vermelha) -->
-    <include>
+    <!-- <include>
       <uri>model://coke_can</uri>
       <pose>1 1 1.1 0 0 0</pose>
-    </include>
+    </include> -->
 
     <!-- Câmera (opcional, apenas visual) -->
     <!-- <include>

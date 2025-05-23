@@ -118,6 +118,18 @@ Você poderá movimentar os slides laterais para movimentação e teste do braç
 O Gazebo deverá abrir com esta tela:
 ![UR10 Gazebo sem garra](./tela_robot_gazebo.png)
 
+## Simulação do braço robótico no Gazebo com o Movit e - RVIz SEM A GARRA
+
+```bash
+    roslaunch ur10_moveit_lab ur10_world_lab1.launch
+```
+
+A seguinte tela deverá abrir:
+![UR10 Gazebo com Moveit](./tela_UR10_rviz_gazebo.png)
+
+Alterando-se a posição do braço robótico no RViz, o braço robótico será movido no Gazebo.
+
+
 ## Tutorial Via GitHub Codespaces
 
 Na execução via github Codespaces você não precisará instalar nada em seu computador, terá apenas que ter uma conta no github.
