@@ -109,8 +109,14 @@ Você poderá movimentar os slides laterais para movimentação e teste do braç
 
 ## Simulação do braço robótico no simulador Gazebo
 
+1. Para verificar a simulação do UR10 no Gazebo:
 
+```bash
+    roslaunch ur_gazebo ur10_bringup.launch
+```
 
+O Gazebo deverá abrir com esta tela:
+![UR10 Gazebo sem garra](./tela_robot_gazebo.png)
 
 ## Tutorial Via GitHub Codespaces
 

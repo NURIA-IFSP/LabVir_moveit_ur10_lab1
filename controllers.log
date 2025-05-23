@@ -1,0 +1,37 @@
+controller: 
+  - 
+    name: "joint_group_eff_controller"
+    state: "initialized"
+    type: "effort_controllers/JointGroupEffortController"
+    claimed_resources: 
+      - 
+        hardware_interface: "hardware_interface::EffortJointInterface"
+        resources: 
+          - elbow_joint
+          - shoulder_lift_joint
+          - shoulder_pan_joint
+          - wrist_1_joint
+          - wrist_2_joint
+          - wrist_3_joint
+  - 
+    name: "joint_state_controller"
+    state: "running"
+    type: "joint_state_controller/JointStateController"
+    claimed_resources: 
+      - 
+        hardware_interface: "hardware_interface::JointStateInterface"
+        resources: []
+  - 
+    name: "eff_joint_traj_controller"
+    state: "running"
+    type: "effort_controllers/JointTrajectoryController"
+    claimed_resources: 
+      - 
+        hardware_interface: "hardware_interface::EffortJointInterface"
+        resources: 
+          - elbow_joint
+          - shoulder_lift_joint
+          - shoulder_pan_joint
+          - wrist_1_joint
+          - wrist_2_joint
+          - wrist_3_joint

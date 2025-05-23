@@ -1,0 +1,18 @@
+controller: 
+  - 
+    name: "joint_state_controller"
+    state: "running"
+    type: "joint_state_controller/JointStateController"
+    claimed_resources: 
+      - 
+        hardware_interface: "hardware_interface::JointStateInterface"
+        resources: []
+  - 
+    name: "gripper_controller"
+    state: "running"
+    type: "effort_controllers/JointPositionController"
+    claimed_resources: 
+      - 
+        hardware_interface: "hardware_interface::EffortJointInterface"
+        resources: 
+          - pg70_finger_left_joint

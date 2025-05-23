@@ -62,7 +62,7 @@
     <transmission name="shoulder_pan_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="shoulder_pan_joint">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="shoulder_pan_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -72,7 +72,7 @@
     <transmission name="shoulder_lift_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="shoulder_lift_joint">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="shoulder_lift_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -82,7 +82,7 @@
     <transmission name="elbow_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="elbow_joint">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="elbow_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -92,7 +92,7 @@
     <transmission name="wrist_1_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="wrist_1_joint">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="wrist_1_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -102,7 +102,7 @@
     <transmission name="wrist_2_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="wrist_2_joint">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="wrist_2_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -112,7 +112,7 @@
     <transmission name="wrist_3_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="wrist_3_joint">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
         <actuator name="wrist_3_motor">
             <mechanicalReduction>1</mechanicalReduction>
@@ -362,14 +362,19 @@
         <parent link="flange" />
         <child link="tool0" />
     </joint>
-    <!-- Inclui a garra -->
+    <!-- <xacro:ur10_robot prefix="" /> -->
     <joint name="pg70_base_joint" type="fixed">
         <parent link="tool0" />
         <child link="pg70_base_link" />
         <origin rpy="0 0 0" xyz="0 0 0" />
     </joint>
-    <!--     PALM -->
+    <!-- BASE -->
     <link name="pg70_base_link">
+        <inertial>
+            <mass value="0.5" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4" />
+        </inertial>
         <visual>
             <geometry>
                 <mesh filename="package://schunk_pg70/meshes/pg70.dae" />
@@ -382,13 +387,7 @@
             <geometry>
                 <mesh filename="package://schunk_pg70/meshes/pg70.dae" />
             </geometry>
-            <material name="blue" />
         </collision>
-        <inertial>
-            <mass value="0.1" />
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
-        </inertial>
     </link>
     <!-- LEFT FINGER BASE -->
     <joint name="pg70_finger_left_joint" type="prismatic">
@@ -399,25 +398,22 @@
         <axis xyz="0 1 0" />
     </joint>
     <link name="pg70_finger_left_link">
+        <inertial>
+            <mass value="0.05" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5" />
+        </inertial>
         <visual>
             <geometry>
                 <box size="0.03 0.01 0.01" />
             </geometry>
-            <material name="black">
-                <color rgba="0 0 0 1" />
-            </material>
+            <material name="black" />
         </visual>
         <collision>
             <geometry>
                 <box size="0.03 0.01 0.01" />
             </geometry>
-            <material name="black" />
         </collision>
-        <inertial>
-            <mass value="0.1" />
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
-        </inertial>
     </link>
     <!-- LEFT FINGERTIP -->
     <joint name="pg70_fingertip_left_joint" type="fixed">
@@ -426,61 +422,11 @@
         <origin rpy="0 0 0" xyz="0 0.01 0.045" />
     </joint>
     <link name="pg70_fingertip_left_link">
-        <visual>
-            <geometry>
-                <box size="0.03 0.01 0.1" />
-            </geometry>
-            <material name="silver">
-                <color rgba="0.8 0.8 0.8 1" />
-            </material>
-        </visual>
-        <collision>
-            <geometry>
-                <box size="0.03 0.01 0.1" />
-            </geometry>
-            <material name="black" />
-        </collision>
         <inertial>
-            <mass value="0.1" />
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+            <mass value="0.02" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="5e-6" ixy="0" ixz="0" iyy="5e-6" iyz="0" izz="5e-6" />
         </inertial>
-    </link>
-    <!-- RIGHT FINGER BASE -->
-    <joint name="pg70_finger_right_joint" type="prismatic">
-        <mimic joint="pg70_finger_left_joint" multiplier="1" offset="0" />
-        <parent link="pg70_base_link" />
-        <child link="pg70_finger_right_link" />
-        <limit effort="100" lower="-0.001" upper="0.04" velocity="2.0" />
-        <origin rpy="-0 0 0" xyz="0 0 0.0789" />
-        <axis xyz="0 -1 0" />
-    </joint>
-    <link name="pg70_finger_right_link">
-        <visual>
-            <geometry>
-                <box size="0.03 0.01 0.01" />
-            </geometry>
-            <material name="black" />
-        </visual>
-        <collision>
-            <geometry>
-                <box size="0.03 0.01 0.01" />
-            </geometry>
-            <material name="black" />
-        </collision>
-        <inertial>
-            <mass value="0.1" />
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
-        </inertial>
-    </link>
-    <!-- RIGHT FINGERTIP -->
-    <joint name="pg70_fingertip_right_joint" type="fixed">
-        <parent link="pg70_finger_right_link" />
-        <child link="pg70_fingertip_right_link" />
-        <origin rpy="0 0 0" xyz="0 -0.01 0.045" />
-    </joint>
-    <link name="pg70_fingertip_right_link">
         <visual>
             <geometry>
                 <box size="0.03 0.01 0.1" />
@@ -491,36 +437,83 @@
             <geometry>
                 <box size="0.03 0.01 0.1" />
             </geometry>
-            <material name="black" />
         </collision>
-        <inertial>
-            <mass value="0.1" />
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
-        </inertial>
     </link>
-    <transmission name="trans_pg70_finger_left_joint">
+    <!-- RIGHT FINGER BASE -->
+    <joint name="pg70_finger_right_joint" type="prismatic">
+        <mimic joint="pg70_finger_left_joint" multiplier="1" offset="0" />
+        <parent link="pg70_base_link" />
+        <child link="pg70_finger_right_link" />
+        <limit effort="100" lower="-0.001" upper="0.04" velocity="2.0" />
+        <origin rpy="0 0 0" xyz="0 0 0.0789" />
+        <axis xyz="0 -1 0" />
+    </joint>
+    <link name="pg70_finger_right_link">
+        <inertial>
+            <mass value="0.05" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5" />
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="0.03 0.01 0.01" />
+            </geometry>
+            <material name="black" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.03 0.01 0.01" />
+            </geometry>
+        </collision>
+    </link>
+    <!-- RIGHT FINGERTIP -->
+    <joint name="pg70_fingertip_right_joint" type="fixed">
+        <parent link="pg70_finger_right_link" />
+        <child link="pg70_fingertip_right_link" />
+        <origin rpy="0 0 0" xyz="0 -0.01 0.045" />
+    </joint>
+    <link name="pg70_fingertip_right_link">
+        <inertial>
+            <mass value="0.02" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <inertia ixx="5e-6" ixy="0" ixz="0" iyy="5e-6" iyz="0" izz="5e-6" />
+        </inertial>
+        <visual>
+            <geometry>
+                <box size="0.03 0.01 0.1" />
+            </geometry>
+            <material name="silver" />
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.03 0.01 0.1" />
+            </geometry>
+        </collision>
+    </link>
+    <!-- Transmissions -->
+    <transmission name="pg70_finger_left_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="pg70_finger_left_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="pg70_finger_left_joint_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <actuator name="pg70_finger_left_motor">
             <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
     </transmission>
-    <transmission name="trans_pg70_finger_right_joint">
+    <transmission name="pg70_finger_right_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="pg70_finger_right_joint">
             <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </joint>
-        <actuator name="pg70_finger_right_joint_motor">
-            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <actuator name="pg70_finger_right_motor">
             <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         </actuator>
     </transmission>
+    <!-- Plugin para ROS control via Gazebo -->
     <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
             <robotNamespace>/</robotNamespace>
         </plugin>
     </gazebo>
